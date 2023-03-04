@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {Button, SafeAreaView, ScrollView, Text, View} from 'react-native';
 
-const ResultPage = () => {
+const ResultPage: React.FC = ({navigation}: any) => {
   const [state, setState] = useState<string>('AMOOOOOOOOOOOO');
   const click = () => {
+    navigation.navigate('Search');
     setState(
       state === 'BUBIIIIIIIIIIIII' ? 'AMOOOOOOOOOOOO' : 'BUBIIIIIIIIIIIII',
     );
