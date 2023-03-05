@@ -4,25 +4,24 @@ import SelectDropdown from 'react-native-select-dropdown';
 import {getAllUserRepos} from '../../services/GithubApis';
 import useDebounce from '../../utils/hooks/useDebounce';
 
-const ResultPage: React.FC = () => {
-  const [repos, setRepos] = useState<Array<string>>([]);
-  const [textInput, setTextInput] = useState<string>('');
-  const debouncedSearchTerm = useDebounce(textInput, 1000);
-
+const ResultPage: React.FC = (props: any) => {
+  // const [repos, setRepos] = useState<Array<string>>([]);
+  // const debouncedSearchTerm = useDebounce(textInput, 1000);
+  console.log('valore passato', props);
   const onChangeText = (text: string) => {
     console.log('text', text);
-    setTextInput(text);
+    // setTextInput(text);
   };
 
-  useEffect(() => {
-    if (debouncedSearchTerm) {
-      getAllUserRepos(debouncedSearchTerm)
-        .then((resp: any) => setRepos(resp.data.map((el: any) => el.full_name)))
-        .catch(err => console.log('err', err));
-    } else {
-      setRepos([]);
-    }
-  }, [debouncedSearchTerm]);
+  // useEffect(() => {
+  //   if (debouncedSearchTerm) {
+  //     getAllUserRepos(debouncedSearchTerm)
+  //       .then((resp: any) => setRepos(resp.data.map((el: any) => el.full_name)))
+  //       .catch(err => console.log('err', err));
+  //   } else {
+  //     setRepos([]);
+  //   }
+  // }, [debouncedSearchTerm]);
 
   return (
     <SafeAreaView>
@@ -33,7 +32,7 @@ const ResultPage: React.FC = () => {
             onChangeText={text => onChangeText(text)}
             style={{padding: 10, borderColor: 'black'}}
           />
-          {textInput && (
+          {/* {textInput && (
             <Text>
               {repos !== [] ? (
                 <SelectDropdown
@@ -52,7 +51,7 @@ const ResultPage: React.FC = () => {
                 <Text>No result</Text>
               )}
             </Text>
-          )}
+          )} */}
         </View>
       </ScrollView>
     </SafeAreaView>

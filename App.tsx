@@ -9,8 +9,8 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Result" component={ResultPage} />
         <Stack.Screen name="Search" component={SearchPage} />
+        <Stack.Screen name="Result" component={ResultPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
