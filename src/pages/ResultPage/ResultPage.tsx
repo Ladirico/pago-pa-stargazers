@@ -1,37 +1,58 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, Text, TextInput, View} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import {getAllUserRepos} from '../../services/GithubApis';
+import useDebounce from '../../utils/hooks/useDebounce';
 
 const ResultPage: React.FC = () => {
-  const [state, setState] = useState<Array<string>>([]);
+  const [repos, setRepos] = useState<Array<string>>([]);
+  const [textInput, setTextInput] = useState<string>('');
+  const debouncedSearchTerm = useDebounce(textInput, 1000);
+
+  const onChangeText = (text: string) => {
+    console.log('text', text);
+    setTextInput(text);
+  };
 
   useEffect(() => {
-    getAllUserRepos()
-      .then((resp: any) => setState(resp.data.map((el: any) => el.full_name)))
-      .catch(err => console.log('err', err));
-  }, []);
+    if (debouncedSearchTerm) {
+      getAllUserRepos(debouncedSearchTerm)
+        .then((resp: any) => setRepos(resp.data.map((el: any) => el.full_name)))
+        .catch(err => console.log('err', err));
+    } else {
+      setRepos([]);
+    }
+  }, [debouncedSearchTerm]);
 
   return (
     <SafeAreaView>
       <ScrollView>
         <View>
-          <Text>
-            {state && (
-              <SelectDropdown
-                data={state}
-                onSelect={(selectedItem, index) => {
-                  console.log(selectedItem, index);
-                }}
-                buttonTextAfterSelection={(selectedItem, index) => {
-                  return selectedItem;
-                }}
-                rowTextForSelection={(item, index) => {
-                  return item;
-                }}
-              />
-            )}
-          </Text>
+          <TextInput
+            editable
+            onChangeText={text => onChangeText(text)}
+            style={{padding: 10, borderColor: 'black'}}
+          />
+          {textInput && (
+            <Text>
+              {repos !== [] ? (
+                <SelectDropdown
+                  data={repos}
+                  onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index);
+                  }}
+                  buttonTextAfterSelection={(selectedItem, index) => {
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={(item, index) => {
+                    return item;
+                  }}
+                />
+              ) : (
+                <Text>No result</Text>
+              )}
+            </Text>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
