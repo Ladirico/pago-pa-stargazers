@@ -3,37 +3,47 @@ import {
   SafeAreaView,
   ScrollView,
   Text,
-  TextInput,
   View,
   StyleSheet,
-  Button,
+  TextInput,
+  Image,
+  TouchableOpacity,
 } from 'react-native';
 
 const SearchPage = ({navigation}: any) => {
   const [textInput, setTextInput] = useState<string>('');
 
   const onChangeText = (text: string) => {
-    console.log('text', text);
     setTextInput(text);
   };
 
   const goForward = () => {
-    console.log('eccoci');
-    navigation.navigate('Result', {textInput: textInput});
+    navigation.navigate('ResultPage', {textInput: textInput});
   };
 
   return (
     <SafeAreaView style={style.container}>
       <ScrollView>
-        <View>
-          <Text style={style.title}>Title</Text>
-          <Text style={style.subtitle}>Subtitle</Text>
-          <TextInput
-            style={style.input}
-            editable
-            onChangeText={text => onChangeText(text)}
+        <View style={style.container_logo_name}>
+          <Image
+            source={{
+              uri: 'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
+            }}
+            style={style.img}
           />
-          <Button onPress={goForward} title="avanti" />
+          <Text style={style.title}>Stalking Favs</Text>
+          <Text style={style.subtitle}>
+            Research information about your favorites creators on GitHub
+          </Text>
+          <View style={style.line} />
+        </View>
+        <View style={style.inputWrapper}>
+          <TextInput style={style.input} editable onChangeText={onChangeText} />
+        </View>
+        <View style={style.container_button}>
+          <TouchableOpacity onPress={goForward} style={style.button}>
+            <Text style={style.button_text}>Start Stalking</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -43,48 +53,73 @@ const style = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#F7EFCA',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#000000',
+  },
+  container_logo_name: {
+    paddingTop: 30,
+    marginBottom: 20,
+    paddingBottom: 20,
+  },
+  img: {
+    width: 150,
+    height: 150,
+    alignSelf: 'center',
+    borderRadius: 80,
+  },
+  line: {
+    paddingBottom: 30,
+    borderBottomWidth: 1,
+    marginLeft: '25%',
+    marginRight: '25%',
+    borderBottomColor: '#ffffff',
   },
   title: {
     paddingTop: 10,
-    color: '#cc3675',
-    fontSize: 60,
-    fontWeight: 'bold',
+    color: '#ffffff',
+    fontSize: 50,
+    textAlign: 'center',
+    alignItems: 'center',
+    fontWeight: 'normal',
   },
   subtitle: {
     paddingTop: 10,
-    color: '#cc3675',
-    fontSize: 30,
-    fontWeight: 'bold',
+    color: '#ffffff',
+    textAlign: 'center',
+    alignItems: 'center',
+    fontSize: 15,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   inputWrapper: {
-    marginTop: '20px',
     width: '100%',
+    alignItems: 'center',
   },
   input: {
-    backgroundColor: 'white',
-    borderColor: 'black',
-    borderRadius: 10,
-    width: '100%',
+    width: '70%',
+    textAlign: 'center',
+    height: 50,
+    backgroundColor: '#ffffff',
+    borderRadius: 8,
+    borderWidth: 1.5,
   },
   container_button: {
     paddingTop: 20,
   },
   button: {
-    backgroundColor: '#cc3675',
-    borderRadius: 10,
-    width: 100,
+    backgroundColor: '#2da44e',
+    borderRadius: 6,
+    width: 150,
+    height: 40,
     alignSelf: 'center',
+    justifyContent: 'center',
     paddingTop: 4,
     paddingBottom: 4,
   },
   button_text: {
     color: 'white',
-    fontSize: 24,
-    fontFamily: 'SNORTER PERSONAL USE',
+    fontSize: 14,
     alignSelf: 'center',
+    lineHeight: 20,
   },
 });
 
