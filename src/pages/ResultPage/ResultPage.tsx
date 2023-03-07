@@ -72,7 +72,7 @@ const style = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#000000',
+    backgroundColor: '#24292f',
   },
   containerSelect: {
     width: '100%',
@@ -86,10 +86,10 @@ const style = StyleSheet.create({
     borderRadius: 8,
     borderWidth: 1.5,
   },
-  dropdownBtnTxtStyle: {color: '#000000', textAlign: 'left'},
+  dropdownBtnTxtStyle: {color: '#24292f', textAlign: 'left'},
   dropdownDropdownStyle: {backgroundColor: '#ffffff'},
-  dropdownRowStyle: {backgroundColor: '#ffffff', borderBottomColor: '#000000'},
-  dropdownRowTxtStyle: {color: '#000000', textAlign: 'center'},
+  dropdownRowStyle: {backgroundColor: '#ffffff', borderBottomColor: '#24292f'},
+  dropdownRowTxtStyle: {color: '#24292f', textAlign: 'center'},
   input: {
     fontSize: 18,
     backgroundColor: 'white',
