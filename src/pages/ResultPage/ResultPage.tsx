@@ -1,15 +1,9 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AxiosResponse} from 'axios';
 import React, {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
+import PageHeader from '../../components/PageHeader/PageHeader';
 import {getAllUserRepos, getUserInfo} from '../../services/GithubApis';
 import {responseAllUserReposInterface} from '../../services/Interfaces/ResponseAllUserReposInterface';
 import {responseUserInfoInterface} from '../../services/Interfaces/ResponseUserInfoInterface';
@@ -20,7 +14,7 @@ type RootStackParamList = {
 };
 type Props = NativeStackScreenProps<RootStackParamList, 'ResultPage'>;
 
-const ResultPage: React.FC<Props> = ({route}: Props) => {
+const ResultPage = ({route}: Props) => {
   const {params} = route;
   const [userInfo, setUserInfo] = useState<responseUserInfoInterface>();
   const [repos, setRepos] = useState<Array<string>>([]);
@@ -41,13 +35,11 @@ const ResultPage: React.FC<Props> = ({route}: Props) => {
   return (
     <SafeAreaView style={style.container}>
       <ScrollView>
-        <View style={style.container_logo_name}>
-          <Image source={{uri: userInfo?.avatar_url}} style={style.img} />
-          <Text style={style.title}>{userInfo?.name}</Text>
-          <Text style={style.subtitle}>{params.textInput}</Text>
-          <View style={style.line} />
-        </View>
-
+        <PageHeader
+          url={userInfo?.avatar_url}
+          title={userInfo?.name}
+          subtitle={params.textInput}
+        />
         <View style={style.containerSelect}>
           {repos.length > 0 ? (
             <SelectDropdown
@@ -82,44 +74,9 @@ const style = StyleSheet.create({
     height: '100%',
     backgroundColor: '#000000',
   },
-  container_logo_name: {
-    paddingTop: 30,
-    marginBottom: 20,
-    paddingBottom: 20,
-  },
-  img: {
-    width: 150,
-    height: 150,
-    alignSelf: 'center',
-    borderRadius: 80,
-  },
-  title: {
-    paddingTop: 10,
-    color: '#ffffff',
-    fontSize: 50,
-    textAlign: 'center',
-    alignItems: 'center',
-    fontWeight: 'normal',
-  },
-  subtitle: {
-    paddingTop: 10,
-    color: '#ffffff',
-    textAlign: 'center',
-    alignItems: 'center',
-    fontSize: 15,
-    paddingLeft: 20,
-    paddingRight: 20,
-  },
   containerSelect: {
     width: '100%',
     alignItems: 'center',
-  },
-  line: {
-    paddingBottom: 30,
-    borderBottomWidth: 1,
-    marginLeft: '25%',
-    marginRight: '25%',
-    borderBottomColor: '#ffffff',
   },
   dropdownBtnStyle: {
     width: '70%',
