@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import Line from '../../../../components/Line/Line';
+import Line from '../../../../components/line/Line';
 import {responseStargazersInterfaces} from '../../../../services/Interfaces/ResponseStargazersInterfaces';
 
 interface StargazersInterface {

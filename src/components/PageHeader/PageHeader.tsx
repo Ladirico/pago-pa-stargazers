@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import Line from '../Line/Line';
+import Line from '../line/Line';
 
 interface Props {
   url?: string;

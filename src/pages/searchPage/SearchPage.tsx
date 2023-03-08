@@ -8,7 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import PageHeader from '../../components/PageHeader/PageHeader';
+import PageHeader from '../../components/pageHeader/PageHeader';
 
 const SearchPage = ({navigation}: any) => {
   const [textInput, setTextInput] = useState<string>('');

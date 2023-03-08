@@ -3,7 +3,7 @@ import {AxiosResponse} from 'axios';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
-import PageHeader from '../../components/PageHeader/PageHeader';
+import PageHeader from '../../components/pageHeader/PageHeader';
 import {
   getAllUserRepos,
   getStargazers,
@@ -109,28 +109,6 @@ const style = StyleSheet.create({
   dropdownDropdownStyle: {backgroundColor: '#f6f8fa'},
   dropdownRowStyle: {backgroundColor: '#f6f8fa', borderBottomColor: '#24292f'},
   dropdownRowTxtStyle: {color: '#24292f', textAlign: 'center'},
-  input: {
-    fontSize: 18,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    paddingLeft: 20,
-  },
-  container_button: {
-    paddingTop: 20,
-  },
-  button: {
-    backgroundColor: '#cc3675',
-    borderRadius: 10,
-    width: 100,
-    alignSelf: 'center',
-    paddingTop: 4,
-    paddingBottom: 4,
-  },
-  button_text: {
-    color: 'white',
-    fontSize: 24,
-    alignSelf: 'center',
-  },
 });
 
 export default ResultPage;
