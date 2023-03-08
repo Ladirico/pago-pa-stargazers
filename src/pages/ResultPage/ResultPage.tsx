@@ -9,9 +9,9 @@ import {
   getStargazers,
   getUserInfo,
 } from '../../services/GithubApis';
-import {responseAllUserReposInterface} from '../../services/Interfaces/ResponseAllUserReposInterface';
-import {responseStargazersInterfaces} from '../../services/Interfaces/ResponseStargazersInterfaces';
-import {responseUserInfoInterface} from '../../services/Interfaces/ResponseUserInfoInterface';
+import {responseAllUserReposInterface} from '../../services/responseInterfaces/ResponseAllUserReposInterface';
+import {responseStargazersInterfaces} from '../../services/responseInterfaces/ResponseStargazersInterfaces';
+import {responseUserInfoInterface} from '../../services/responseInterfaces/ResponseUserInfoInterface';
 import ShowStargazers from './components/ShowStargazers/ShowStargazers';
 
 type RootStackParamList = {

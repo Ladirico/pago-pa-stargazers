@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import Line from '../../../../components/line/Line';
-import {responseStargazersInterfaces} from '../../../../services/Interfaces/ResponseStargazersInterfaces';
+import {responseStargazersInterfaces} from '../../../../services/responseInterfaces/ResponseStargazersInterfaces';
 
 interface StargazersInterface {
   stargazers: Array<responseStargazersInterfaces> | [] | undefined;
