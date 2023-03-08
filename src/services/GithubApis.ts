@@ -4,11 +4,6 @@ import {responseStargazersInterfaces} from './Interfaces/ResponseStargazersInter
 import {responseUserAndRepoInfoInterfaces} from './Interfaces/ResponseUserAndRepoInfoInterfaces';
 import {responseUserInfoInterface} from './Interfaces/ResponseUserInfoInterface';
 
-interface userAndRepoNamesInterface {
-  userName: string;
-  repoName: string;
-}
-
 export const getUserInfo = (userName: string) => {
   return axios.get<responseUserInfoInterface>(
     `https://api.github.com/users/${userName}`,
@@ -21,15 +16,13 @@ export const getAllUserRepos = (userName: string) => {
   );
 };
 
-export const getUserSingleRepo = (props: userAndRepoNamesInterface) => {
-  const {userName, repoName} = props;
+export const getUserSingleRepo = (userName: string, repoName: string) => {
   return axios.get<responseUserAndRepoInfoInterfaces>(
     `https://api.github.com/repos/${userName}/${repoName}`,
   );
 };
 
-export const getStargazers = (props: userAndRepoNamesInterface) => {
-  const {userName, repoName} = props;
+export const getStargazers = (userName: string, repoName: string) => {
   return axios.get<responseStargazersInterfaces[]>(
     `https://api.github.com/repos/${userName}/${repoName}/stargazers`,
   );

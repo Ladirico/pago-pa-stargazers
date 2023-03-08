@@ -31,7 +31,12 @@ const SearchPage = ({navigation}: any) => {
         />
 
         <View style={style.inputWrapper}>
-          <TextInput style={style.input} editable onChangeText={onChangeText} />
+          <TextInput
+            style={style.input}
+            placeholder="Search by name"
+            editable
+            onChangeText={onChangeText}
+          />
         </View>
         <View style={style.container_button}>
           <TouchableOpacity onPress={goForward} style={style.button}>
@@ -56,17 +61,18 @@ const style = StyleSheet.create({
     width: '70%',
     textAlign: 'center',
     height: 50,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f6f8fa',
+    borderColor: '#d0d7de',
     borderRadius: 8,
     borderWidth: 1.5,
   },
   container_button: {
-    paddingTop: 20,
+    paddingTop: 40,
   },
   button: {
     backgroundColor: '#2da44e',
     borderRadius: 6,
-    width: 150,
+    width: 130,
     height: 40,
     alignSelf: 'center',
     justifyContent: 'center',

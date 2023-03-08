@@ -4,9 +4,15 @@ import React, {useEffect, useState} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import PageHeader from '../../components/PageHeader/PageHeader';
-import {getAllUserRepos, getUserInfo} from '../../services/GithubApis';
+import {
+  getAllUserRepos,
+  getStargazers,
+  getUserInfo,
+} from '../../services/GithubApis';
 import {responseAllUserReposInterface} from '../../services/Interfaces/ResponseAllUserReposInterface';
+import {responseStargazersInterfaces} from '../../services/Interfaces/ResponseStargazersInterfaces';
 import {responseUserInfoInterface} from '../../services/Interfaces/ResponseUserInfoInterface';
+import ShowStargazers from './components/ShowStargazers/ShowStargazers';
 
 type RootStackParamList = {
   ResultPage: {textInput: string};
@@ -17,18 +23,29 @@ type Props = NativeStackScreenProps<RootStackParamList, 'ResultPage'>;
 const ResultPage = ({route}: Props) => {
   const {params} = route;
   const [userInfo, setUserInfo] = useState<responseUserInfoInterface>();
+  const [stargazers, setStargazers] =
+    useState<responseStargazersInterfaces[]>();
   const [repos, setRepos] = useState<Array<string>>([]);
+
+  const onChangeValue = (selectedItem: string) => {
+    userInfo?.login &&
+      getStargazers(userInfo.login, selectedItem)
+        .then(resp => setStargazers(resp.data))
+        .catch(err => console.log('err', err));
+  };
 
   useEffect(() => {
     getUserInfo(params.textInput)
-      .then((resp: AxiosResponse<responseUserInfoInterface>) =>
-        setUserInfo(resp.data),
-      )
-      .catch(err => console.log('errr', err));
-    getAllUserRepos(params.textInput)
-      .then((resp: AxiosResponse) =>
-        setRepos(resp.data.map((el: responseAllUserReposInterface) => el.name)),
-      )
+      .then((resp: AxiosResponse<responseUserInfoInterface>) => {
+        setUserInfo(resp.data);
+        getAllUserRepos(resp.data.login)
+          .then((response: AxiosResponse) =>
+            setRepos(
+              response.data.map((el: responseAllUserReposInterface) => el.name),
+            ),
+          )
+          .catch(err => console.log('err', err));
+      })
       .catch(err => console.log('errr', err));
   }, [params.textInput]);
 
@@ -38,7 +55,7 @@ const ResultPage = ({route}: Props) => {
         <PageHeader
           url={userInfo?.avatar_url}
           title={userInfo?.name}
-          subtitle={params.textInput}
+          subtitle={userInfo?.login}
         />
         <View style={style.containerSelect}>
           {repos.length > 0 ? (
@@ -49,8 +66,8 @@ const ResultPage = ({route}: Props) => {
               rowStyle={style.dropdownRowStyle}
               rowTextStyle={style.dropdownRowTxtStyle}
               data={repos}
-              onSelect={(selectedItem, index) => {
-                console.log(selectedItem, index);
+              onSelect={selectedItem => {
+                onChangeValue(selectedItem);
               }}
               buttonTextAfterSelection={selectedItem => {
                 return selectedItem;
@@ -62,6 +79,7 @@ const ResultPage = ({route}: Props) => {
           ) : (
             <Text>No result</Text>
           )}
+          <ShowStargazers stargazers={stargazers} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -82,13 +100,14 @@ const style = StyleSheet.create({
     width: '70%',
     height: 50,
     textAlign: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f6f8fa',
+    borderColor: '#d0d7de',
     borderRadius: 8,
     borderWidth: 1.5,
   },
   dropdownBtnTxtStyle: {color: '#24292f', textAlign: 'left'},
-  dropdownDropdownStyle: {backgroundColor: '#ffffff'},
-  dropdownRowStyle: {backgroundColor: '#ffffff', borderBottomColor: '#24292f'},
+  dropdownDropdownStyle: {backgroundColor: '#f6f8fa'},
+  dropdownRowStyle: {backgroundColor: '#f6f8fa', borderBottomColor: '#24292f'},
   dropdownRowTxtStyle: {color: '#24292f', textAlign: 'center'},
   input: {
     fontSize: 18,

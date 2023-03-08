@@ -1,5 +1,6 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import Line from '../Line/Line';
 
 interface Props {
   url?: string;
@@ -13,7 +14,7 @@ const PageHeader = ({url, title, subtitle}: Props) => {
       <Image source={{uri: url}} style={style.img} />
       <Text style={style.title}>{title}</Text>
       <Text style={style.subtitle}>{subtitle}</Text>
-      <View style={style.line} />
+      <Line />
     </View>
   );
 };
@@ -46,6 +47,7 @@ const style = StyleSheet.create({
     fontSize: 15,
     paddingLeft: 20,
     paddingRight: 20,
+    paddingBottom: 30,
   },
   line: {
     paddingBottom: 30,
