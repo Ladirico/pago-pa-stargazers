@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
 import Line from '../../../../components/line/Line';
 import {responseStargazersInterfaces} from '../../../../services/responseInterfaces/ResponseStargazersInterfaces';
@@ -8,9 +8,14 @@ interface StargazersInterface {
 }
 
 const ShowStargazers = ({stargazers}: StargazersInterface) => {
+  const [mapPari, setMapPari] = useState<responseStargazersInterfaces[]>([]);
+  const [mapDispari, setMapDispari] = useState<responseStargazersInterfaces[]>(
+    [],
+  );
+
   const [showStargazersList, setShowshowStargazersList] =
     useState<boolean>(false);
-  console.log(stargazers);
+
   useEffect(() => {
     setShowshowStargazersList(false);
   }, []);
@@ -19,33 +24,58 @@ const ShowStargazers = ({stargazers}: StargazersInterface) => {
     setShowshowStargazersList(!showStargazersList);
   };
 
+  useMemo(() => {
+    let mapPariCopy: any = stargazers?.filter((el, index) => index % 2 === 0);
+    let mapDispariCopy: any = stargazers?.filter(
+      (el, index) => index % 2 !== 0,
+    );
+    setMapPari(mapPariCopy);
+    setMapDispari(mapDispariCopy);
+  }, [stargazers]);
+
   return (
     <View style={style.container}>
       <Line />
-      {stargazers ? (
+      {stargazers && (
         <TouchableOpacity onPress={showList}>
           <View style={style.wrapperStars}>
             <Text style={style.star}>&#9734;</Text>
             <Text style={style.text}> {stargazers.length}</Text>
           </View>
         </TouchableOpacity>
-      ) : (
-        <View style={style.wrapperStars}>
-          <Text style={style.textSottile}>
-            Seleziona un progetto per vedere da quante persone è stato messo tra
-            i perferiti
-          </Text>
+      )}
+      {showStargazersList && (
+        <View style={style.wrapper}>
+          {mapPari.length > 0 && (
+            <View style={style.wrapper2}>
+              <View style={style.wrap}>
+                {mapPari?.map((el, index) => {
+                  return (
+                    <View style={style.wrapperStars1} key={index}>
+                      <Image style={style.img} source={{uri: el.avatar_url}} />
+                      <Text style={style.text}>{el.login}</Text>
+                    </View>
+                  );
+                })}
+              </View>
+              <View style={style.wrap}>
+                {mapPari &&
+                  mapDispari?.map((el, index) => {
+                    return (
+                      <View style={style.wrapperStars1} key={index}>
+                        <Image
+                          style={style.img}
+                          source={{uri: el.avatar_url}}
+                        />
+                        <Text style={style.text}>{el.login}</Text>
+                      </View>
+                    );
+                  })}
+              </View>
+            </View>
+          )}
         </View>
       )}
-      {showStargazersList &&
-        stargazers?.map((el, index) => {
-          return (
-            <View style={style.wrapperStars} key={index}>
-              <Image style={style.img} source={{uri: el.avatar_url}} />
-              <Text style={style.text}>{el.login}</Text>
-            </View>
-          );
-        })}
     </View>
   );
 };
@@ -57,6 +87,22 @@ const style = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
+  wrapper: {
+    width: '100%',
+    marginBottom: 30,
+  },
+  wrapper2: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+  },
+  wrap: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '50%',
+  },
   star: {
     color: 'yellow',
     fontSize: 20,
@@ -67,6 +113,17 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
+  },
+  wrapperStars1: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    borderColor: 'white',
+    borderWidth: 2,
+    paddingTop: 30,
+    paddingBottom: 30,
   },
   text: {
     color: '#ffffff',
