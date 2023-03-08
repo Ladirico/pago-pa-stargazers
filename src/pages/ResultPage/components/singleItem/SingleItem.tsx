@@ -1,7 +1,12 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
+interface Props {
+  isStarWrapper: boolean | false;
+  text: string | number;
+  avatarUrl?: string;
+}
 
-const SingleItem = (props: any) => {
+const SingleItem = (props: Props) => {
   const {isStarWrapper, text, avatarUrl} = props;
   return (
     <View style={isStarWrapper ? style.wrapperStars1 : style.wrapperStars}>
