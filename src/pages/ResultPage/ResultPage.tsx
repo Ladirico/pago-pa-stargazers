@@ -1,15 +1,9 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AxiosResponse} from 'axios';
 import React, {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
+import {RootStackParamList} from '../../../App';
 import PageHeader from '../../components/pageHeader/PageHeader';
 import {
   getAllUserRepos,
@@ -21,34 +15,24 @@ import {responseStargazersInterfaces} from '../../services/responseInterfaces/Re
 import {responseUserInfoInterface} from '../../services/responseInterfaces/ResponseUserInfoInterface';
 import ShowStargazers from './components/showStargazers/ShowStargazers';
 
-type RootStackParamList = {
-  ResultPage: {textInput: string};
-  SearchPage: undefined;
-};
 type Props = NativeStackScreenProps<RootStackParamList, 'ResultPage'>;
 
-const ResultPage = ({route}: Props) => {
+const ResultPage = ({route, navigation}: Props) => {
   const {params} = route;
   const [userInfo, setUserInfo] = useState<responseUserInfoInterface>();
-  const [showSpinner, setShowSpinner] = useState<boolean>(false);
   const [stargazers, setStargazers] =
     useState<responseStargazersInterfaces[]>();
   const [repos, setRepos] = useState<Array<string>>([]);
 
   const onChangeValue = (selectedItem: string) => {
     if (userInfo?.login) {
-      setShowSpinner(true);
       getStargazers(userInfo.login, selectedItem)
         .then(resp => setStargazers(resp.data))
-        .catch(err => console.log('err', err))
-        .finally(() => {
-          setShowSpinner(false);
-        });
+        .catch(() => navigation.navigate('ErrorPage'));
     }
   };
 
   useEffect(() => {
-    setShowSpinner(true);
     getUserInfo(params.textInput)
       .then((resp: AxiosResponse<responseUserInfoInterface>) => {
         setUserInfo(resp.data);
@@ -58,52 +42,43 @@ const ResultPage = ({route}: Props) => {
               response.data.map((el: responseAllUserReposInterface) => el.name),
             ),
           )
-          .catch(err => console.log('err', err));
+          .catch(() => navigation.navigate('ErrorPage'));
       })
-      .catch(err => console.log('errr', err))
-      .finally(() => {
-        setShowSpinner(false);
-      });
-  }, [params.textInput]);
+      .catch(() => navigation.navigate('ErrorPage'));
+  }, [navigation, params.textInput]);
 
   return (
     <SafeAreaView style={style.container}>
       <ScrollView>
-        {showSpinner ? (
-          <ActivityIndicator size="large" color="#2da44e" />
-        ) : (
-          <>
-            <PageHeader
-              url={userInfo?.avatar_url}
-              title={userInfo?.name}
-              subtitle={userInfo?.login}
+        <PageHeader
+          url={userInfo?.avatar_url}
+          title={userInfo?.name}
+          subtitle={userInfo?.login}
+        />
+        <View style={style.containerSelect}>
+          {repos.length > 0 ? (
+            <SelectDropdown
+              buttonStyle={style.dropdownBtnStyle}
+              buttonTextStyle={style.dropdownBtnTxtStyle}
+              dropdownStyle={style.dropdownDropdownStyle}
+              rowStyle={style.dropdownRowStyle}
+              rowTextStyle={style.dropdownRowTxtStyle}
+              data={repos}
+              onSelect={selectedItem => {
+                onChangeValue(selectedItem);
+              }}
+              buttonTextAfterSelection={selectedItem => {
+                return selectedItem;
+              }}
+              rowTextForSelection={item => {
+                return item;
+              }}
             />
-            <View style={style.containerSelect}>
-              {repos.length > 0 ? (
-                <SelectDropdown
-                  buttonStyle={style.dropdownBtnStyle}
-                  buttonTextStyle={style.dropdownBtnTxtStyle}
-                  dropdownStyle={style.dropdownDropdownStyle}
-                  rowStyle={style.dropdownRowStyle}
-                  rowTextStyle={style.dropdownRowTxtStyle}
-                  data={repos}
-                  onSelect={selectedItem => {
-                    onChangeValue(selectedItem);
-                  }}
-                  buttonTextAfterSelection={selectedItem => {
-                    return selectedItem;
-                  }}
-                  rowTextForSelection={item => {
-                    return item;
-                  }}
-                />
-              ) : (
-                <Text>No result</Text>
-              )}
-              <ShowStargazers stargazers={stargazers} />
-            </View>
-          </>
-        )}
+          ) : (
+            <Text style={style.text}>No result</Text>
+          )}
+          <ShowStargazers stargazers={stargazers} />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -127,6 +102,14 @@ const style = StyleSheet.create({
     borderColor: '#d0d7de',
     borderRadius: 8,
     borderWidth: 1.5,
+  },
+  text: {
+    color: '#ffffff',
+    textAlign: 'center',
+    alignItems: 'center',
+    fontSize: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   dropdownBtnTxtStyle: {color: '#24292f', textAlign: 'left'},
   dropdownDropdownStyle: {backgroundColor: '#f6f8fa'},

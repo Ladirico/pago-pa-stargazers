@@ -1,3 +1,4 @@
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
 import {
   SafeAreaView,
@@ -8,9 +9,12 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
+import {RootStackParamList} from '../../../App';
 import PageHeader from '../../components/pageHeader/PageHeader';
 
-const SearchPage = ({navigation}: any) => {
+type Props = NativeStackScreenProps<RootStackParamList, 'SearchPage'>;
+
+const SearchPage = ({navigation}: Props) => {
   const [textInput, setTextInput] = useState<string>('');
 
   const onChangeText = (text: string) => {

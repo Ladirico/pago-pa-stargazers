@@ -9,10 +9,10 @@ interface StargazersInterface {
 }
 
 const ShowStargazers = ({stargazers}: StargazersInterface) => {
-  const [mapPari, setMapPari] = useState<responseStargazersInterfaces[]>([]);
-  const [mapDispari, setMapDispari] = useState<responseStargazersInterfaces[]>(
-    [],
-  );
+  // const [mapPari, setMapPari] = useState<responseStargazersInterfaces[]>([]);
+  // const [mapDispari, setMapDispari] = useState<responseStargazersInterfaces[]>(
+  //   [],
+  // );
   const [showStargazersList, setShowshowStargazersList] =
     useState<boolean>(false);
 
@@ -20,13 +20,11 @@ const ShowStargazers = ({stargazers}: StargazersInterface) => {
     stargazers && setShowshowStargazersList(!showStargazersList);
   };
 
-  useMemo(() => {
-    let mapPariCopy: any = stargazers?.filter((el, index) => index % 2 === 0);
-    let mapDispariCopy: any = stargazers?.filter(
-      (el, index) => index % 2 !== 0,
-    );
-    setMapPari(mapPariCopy);
-    setMapDispari(mapDispariCopy);
+  const mapPari = useMemo(() => {
+    return stargazers?.filter((el, index) => index % 2 === 0) ?? [];
+  }, [stargazers]);
+  const mapDispari = useMemo(() => {
+    return stargazers?.filter((el, index) => index % 2 !== 0) ?? [];
   }, [stargazers]);
 
   useEffect(() => {
@@ -42,10 +40,10 @@ const ShowStargazers = ({stargazers}: StargazersInterface) => {
         </Text>
       </TouchableOpacity>
       {showStargazersList && (
-        <View style={style.wrapper}>
+        <View style={style.wrapperStargazersList}>
           {mapPari.length > 0 && (
-            <View style={style.wrapper2}>
-              <View style={style.wrap}>
+            <View style={style.alignStargazersLists}>
+              <View style={style.wrapHalfStargazersList}>
                 {mapPari?.map((el, index) => {
                   return (
                     <SingleItem
@@ -56,7 +54,7 @@ const ShowStargazers = ({stargazers}: StargazersInterface) => {
                   );
                 })}
               </View>
-              <View style={style.wrap}>
+              <View style={style.wrapHalfStargazersList}>
                 {mapPari &&
                   mapDispari?.map((el, index) => {
                     return (
@@ -97,18 +95,18 @@ const style = StyleSheet.create({
   butt: {
     width: '100%',
   },
-  wrapper: {
+  wrapperStargazersList: {
     width: '100%',
     marginBottom: 30,
   },
-  wrapper2: {
+  alignStargazersLists: {
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
-  wrap: {
+  wrapHalfStargazersList: {
     display: 'flex',
     flexDirection: 'column',
     width: '50%',
