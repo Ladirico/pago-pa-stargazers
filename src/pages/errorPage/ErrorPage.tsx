@@ -1,10 +1,11 @@
-import {useNavigation} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React from 'react';
 import {Text, View, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import {RootStackParamList} from '../../../App';
 
-const ErrorPage = () => {
-  const navigation = useNavigation();
+type Props = NativeStackScreenProps<RootStackParamList, 'ErrorPage'>;
 
+const ErrorPage = ({navigation}: Props) => {
   const goBackToFirstPage = () => {
     navigation.navigate('SearchPage');
   };

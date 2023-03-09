@@ -9,7 +9,7 @@ interface Props {
 const SingleItem = (props: Props) => {
   const {isStarWrapper = false, text, avatarUrl} = props;
   return (
-    <View style={isStarWrapper ? style.wrapperStars : style.wrapperStars1}>
+    <View style={isStarWrapper ? style.wrapperStars : style.wrapper}>
       {isStarWrapper ? (
         <Text style={style.star}>&#9734;</Text>
       ) : (
@@ -27,15 +27,7 @@ const style = StyleSheet.create({
     color: 'yellow',
     fontSize: 20,
   },
-  wrapperStars: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 30,
-    width: 130,
-  },
-  wrapperStars1: {
+  wrapper: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -45,6 +37,14 @@ const style = StyleSheet.create({
     borderWidth: 2,
     paddingTop: 30,
     paddingBottom: 30,
+  },
+  wrapperStars: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 30,
+    width: 130,
   },
   text: {
     color: '#ffffff',
