@@ -49,12 +49,5 @@ const style = StyleSheet.create({
     paddingRight: 20,
     paddingBottom: 30,
   },
-  line: {
-    paddingBottom: 30,
-    borderBottomWidth: 1,
-    marginLeft: '25%',
-    marginRight: '25%',
-    borderBottomColor: '#ffffff',
-  },
 });
 export default PageHeader;

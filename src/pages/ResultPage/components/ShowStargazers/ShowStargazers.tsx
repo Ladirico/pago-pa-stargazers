@@ -1,7 +1,8 @@
 import React, {useState, useEffect, useMemo} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Image} from 'react-native';
+import {View, TouchableOpacity, StyleSheet, Text} from 'react-native';
 import Line from '../../../../components/line/Line';
 import {responseStargazersInterfaces} from '../../../../services/responseInterfaces/ResponseStargazersInterfaces';
+import SingleItem from '../singleItem/SingleItem';
 
 interface StargazersInterface {
   stargazers: Array<responseStargazersInterfaces> | [] | undefined;
@@ -12,16 +13,11 @@ const ShowStargazers = ({stargazers}: StargazersInterface) => {
   const [mapDispari, setMapDispari] = useState<responseStargazersInterfaces[]>(
     [],
   );
-
   const [showStargazersList, setShowshowStargazersList] =
     useState<boolean>(false);
 
-  useEffect(() => {
-    setShowshowStargazersList(false);
-  }, []);
-
   const showList = () => {
-    setShowshowStargazersList(!showStargazersList);
+    stargazers && setShowshowStargazersList(!showStargazersList);
   };
 
   useMemo(() => {
@@ -33,17 +29,18 @@ const ShowStargazers = ({stargazers}: StargazersInterface) => {
     setMapDispari(mapDispariCopy);
   }, [stargazers]);
 
+  useEffect(() => {
+    setShowshowStargazersList(false);
+  }, []);
+
   return (
     <View style={style.container}>
       <Line />
-      {stargazers && (
-        <TouchableOpacity onPress={showList}>
-          <View style={style.wrapperStars}>
-            <Text style={style.star}>&#9734;</Text>
-            <Text style={style.text}> {stargazers.length}</Text>
-          </View>
-        </TouchableOpacity>
-      )}
+      <TouchableOpacity onPress={showList} style={style.button}>
+        <Text style={style.butt}>
+          <SingleItem isStarWrapper={true} text={stargazers?.length ?? 0} />
+        </Text>
+      </TouchableOpacity>
       {showStargazersList && (
         <View style={style.wrapper}>
           {mapPari.length > 0 && (
@@ -51,10 +48,11 @@ const ShowStargazers = ({stargazers}: StargazersInterface) => {
               <View style={style.wrap}>
                 {mapPari?.map((el, index) => {
                   return (
-                    <View style={style.wrapperStars1} key={index}>
-                      <Image style={style.img} source={{uri: el.avatar_url}} />
-                      <Text style={style.text}>{el.login}</Text>
-                    </View>
+                    <SingleItem
+                      key={index}
+                      text={el.login}
+                      avatarUrl={el.avatar_url}
+                    />
                   );
                 })}
               </View>
@@ -62,13 +60,11 @@ const ShowStargazers = ({stargazers}: StargazersInterface) => {
                 {mapPari &&
                   mapDispari?.map((el, index) => {
                     return (
-                      <View style={style.wrapperStars1} key={index}>
-                        <Image
-                          style={style.img}
-                          source={{uri: el.avatar_url}}
-                        />
-                        <Text style={style.text}>{el.login}</Text>
-                      </View>
+                      <SingleItem
+                        key={index}
+                        text={el.login}
+                        avatarUrl={el.avatar_url}
+                      />
                     );
                   })}
               </View>
@@ -86,6 +82,20 @@ const style = StyleSheet.create({
     marginTop: 40,
     paddingLeft: 20,
     paddingRight: 20,
+  },
+  button: {
+    marginTop: 30,
+    backgroundColor: '#2da44e',
+    borderRadius: 6,
+    width: 130,
+    height: 40,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    paddingTop: 4,
+    paddingBottom: 4,
+  },
+  butt: {
+    width: '100%',
   },
   wrapper: {
     width: '100%',

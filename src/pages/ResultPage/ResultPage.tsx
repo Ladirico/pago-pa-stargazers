@@ -1,7 +1,14 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AxiosResponse} from 'axios';
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import PageHeader from '../../components/pageHeader/PageHeader';
 import {
@@ -23,18 +30,25 @@ type Props = NativeStackScreenProps<RootStackParamList, 'ResultPage'>;
 const ResultPage = ({route}: Props) => {
   const {params} = route;
   const [userInfo, setUserInfo] = useState<responseUserInfoInterface>();
+  const [showSpinner, setShowSpinner] = useState<boolean>(false);
   const [stargazers, setStargazers] =
     useState<responseStargazersInterfaces[]>();
   const [repos, setRepos] = useState<Array<string>>([]);
 
   const onChangeValue = (selectedItem: string) => {
-    userInfo?.login &&
+    if (userInfo?.login) {
+      setShowSpinner(true);
       getStargazers(userInfo.login, selectedItem)
         .then(resp => setStargazers(resp.data))
-        .catch(err => console.log('err', err));
+        .catch(err => console.log('err', err))
+        .finally(() => {
+          setShowSpinner(false);
+        });
+    }
   };
 
   useEffect(() => {
+    setShowSpinner(true);
     getUserInfo(params.textInput)
       .then((resp: AxiosResponse<responseUserInfoInterface>) => {
         setUserInfo(resp.data);
@@ -46,41 +60,50 @@ const ResultPage = ({route}: Props) => {
           )
           .catch(err => console.log('err', err));
       })
-      .catch(err => console.log('errr', err));
+      .catch(err => console.log('errr', err))
+      .finally(() => {
+        setShowSpinner(false);
+      });
   }, [params.textInput]);
 
   return (
     <SafeAreaView style={style.container}>
       <ScrollView>
-        <PageHeader
-          url={userInfo?.avatar_url}
-          title={userInfo?.name}
-          subtitle={userInfo?.login}
-        />
-        <View style={style.containerSelect}>
-          {repos.length > 0 ? (
-            <SelectDropdown
-              buttonStyle={style.dropdownBtnStyle}
-              buttonTextStyle={style.dropdownBtnTxtStyle}
-              dropdownStyle={style.dropdownDropdownStyle}
-              rowStyle={style.dropdownRowStyle}
-              rowTextStyle={style.dropdownRowTxtStyle}
-              data={repos}
-              onSelect={selectedItem => {
-                onChangeValue(selectedItem);
-              }}
-              buttonTextAfterSelection={selectedItem => {
-                return selectedItem;
-              }}
-              rowTextForSelection={item => {
-                return item;
-              }}
+        {showSpinner ? (
+          <ActivityIndicator size="large" color="#2da44e" />
+        ) : (
+          <>
+            <PageHeader
+              url={userInfo?.avatar_url}
+              title={userInfo?.name}
+              subtitle={userInfo?.login}
             />
-          ) : (
-            <Text>No result</Text>
-          )}
-          <ShowStargazers stargazers={stargazers} />
-        </View>
+            <View style={style.containerSelect}>
+              {repos.length > 0 ? (
+                <SelectDropdown
+                  buttonStyle={style.dropdownBtnStyle}
+                  buttonTextStyle={style.dropdownBtnTxtStyle}
+                  dropdownStyle={style.dropdownDropdownStyle}
+                  rowStyle={style.dropdownRowStyle}
+                  rowTextStyle={style.dropdownRowTxtStyle}
+                  data={repos}
+                  onSelect={selectedItem => {
+                    onChangeValue(selectedItem);
+                  }}
+                  buttonTextAfterSelection={selectedItem => {
+                    return selectedItem;
+                  }}
+                  rowTextForSelection={item => {
+                    return item;
+                  }}
+                />
+              ) : (
+                <Text>No result</Text>
+              )}
+              <ShowStargazers stargazers={stargazers} />
+            </View>
+          </>
+        )}
       </ScrollView>
     </SafeAreaView>
   );

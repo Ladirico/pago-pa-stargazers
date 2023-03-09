@@ -1,21 +1,23 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 interface Props {
-  isStarWrapper: boolean | false;
+  isStarWrapper?: boolean | false;
   text: string | number;
   avatarUrl?: string;
 }
 
 const SingleItem = (props: Props) => {
-  const {isStarWrapper, text, avatarUrl} = props;
+  const {isStarWrapper = false, text, avatarUrl} = props;
   return (
-    <View style={isStarWrapper ? style.wrapperStars1 : style.wrapperStars}>
+    <View style={isStarWrapper ? style.wrapperStars : style.wrapperStars1}>
       {isStarWrapper ? (
         <Text style={style.star}>&#9734;</Text>
       ) : (
         <Image style={style.img} source={{uri: avatarUrl}} />
       )}
-      <Text style={style.text}>{text}</Text>
+      <Text style={style.text} ellipsizeMode="clip" numberOfLines={1}>
+        {text}
+      </Text>
     </View>
   );
 };
@@ -31,6 +33,7 @@ const style = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 30,
+    width: 130,
   },
   wrapperStars1: {
     display: 'flex',
@@ -48,6 +51,8 @@ const style = StyleSheet.create({
     textAlign: 'center',
     alignItems: 'center',
     fontSize: 20,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   img: {
     width: 30,
