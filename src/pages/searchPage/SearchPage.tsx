@@ -1,4 +1,5 @@
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {AxiosResponse} from 'axios';
 import React, {useState} from 'react';
 import {
   SafeAreaView,
@@ -11,6 +12,8 @@ import {
 } from 'react-native';
 import {RootStackParamList} from '../../../App';
 import PageHeader from '../../components/pageHeader/PageHeader';
+import {getUserInfo} from '../../services/GithubApis';
+import {responseUserInfoInterface} from '../../services/responseInterfaces/ResponseUserInfoInterface';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'SearchPage'>;
 
@@ -22,7 +25,11 @@ const SearchPage = ({navigation}: Props) => {
   };
 
   const goForward = () => {
-    navigation.navigate('ResultPage', {textInput: textInput});
+    getUserInfo(textInput)
+      .then((resp: AxiosResponse<responseUserInfoInterface>) => {
+        navigation.navigate('ResultPage', {userInfo: resp.data});
+      })
+      .catch(() => navigation.navigate('ErrorPage'));
   };
 
   return (
@@ -31,7 +38,7 @@ const SearchPage = ({navigation}: Props) => {
         <PageHeader
           url="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
           title="Stalking Favs"
-          subtitle="Search for information on youre favourite creators on GitHub"
+          subtitle="Search for information on your favorite creators on GitHub"
         />
 
         <View style={style.inputWrapper}>

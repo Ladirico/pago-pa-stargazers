@@ -4,9 +4,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ResultPage from './src/pages/resultPage/ResultPage';
 import SearchPage from './src/pages/searchPage/SearchPage';
 import ErrorPage from './src/pages/errorPage/ErrorPage';
+import {responseUserInfoInterface} from './src/services/responseInterfaces/ResponseUserInfoInterface';
 
 export type RootStackParamList = {
-  ResultPage: {textInput: string};
+  ResultPage: {userInfo: responseUserInfoInterface};
   SearchPage: undefined;
   ErrorPage: undefined;
 };
