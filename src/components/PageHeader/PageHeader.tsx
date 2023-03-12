@@ -10,7 +10,7 @@ interface Props {
 
 const PageHeader = ({url, title, subtitle}: Props) => {
   return (
-    <View style={style.container_logo_name}>
+    <View style={style.container_logo_name} testID="header-test">
       <Image source={{uri: url}} style={style.img} />
       <Text style={style.title}>{title}</Text>
       <Text style={style.subtitle}>{subtitle}</Text>

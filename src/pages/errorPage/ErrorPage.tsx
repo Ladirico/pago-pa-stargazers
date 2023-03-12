@@ -11,7 +11,7 @@ const ErrorPage = ({navigation}: Props) => {
   };
 
   return (
-    <View style={style.container}>
+    <View style={style.container} testID="error-page-test">
       <Image
         source={{
           uri: 'https://cdn0.iconfinder.com/data/icons/shift-interfaces/32/Error-512.png',

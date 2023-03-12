@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
 const Line = () => {
-  return <View style={style.line} />;
+  return <View style={style.line} testID="line-test" />;
 };
 
 const style = StyleSheet.create({
