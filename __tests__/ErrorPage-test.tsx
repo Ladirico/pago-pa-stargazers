@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react-native';
-import ErrorPage from '../src/screens/errorPage/ErrorPage';
+import ErrorPage from '../app/screens/errorPage/ErrorPage';
 // import {fireEvent} from 'react-native-testing-library';
 
 test('the component should be defined and rendered', () => {

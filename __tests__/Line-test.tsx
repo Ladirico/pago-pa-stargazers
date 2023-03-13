@@ -1,6 +1,6 @@
 import React from 'react';
 import {render, screen} from '@testing-library/react-native';
-import Line from '../src/components/line/Line';
+import Line from '../app/components/line/Line';
 
 test('the component should be defined and rendered', () => {
   const {container} = render(<Line />);

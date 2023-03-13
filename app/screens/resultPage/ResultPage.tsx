@@ -2,8 +2,13 @@ import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {AxiosResponse} from 'axios';
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator} from 'react-native';
-import {SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+  ActivityIndicator,
+} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
 import {RootStackParamList} from '../../App';
 import PageHeader from '../../components/pageHeader/PageHeader';
