@@ -1,17 +1,22 @@
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RouteProp} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {AxiosResponse} from 'axios';
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator} from 'react-native';
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, Text, View} from 'react-native';
 import SelectDropdown from 'react-native-select-dropdown';
-import {RootStackParamList} from '../../../App';
+import {RootStackParamList} from '../../App';
 import PageHeader from '../../components/pageHeader/PageHeader';
 import {getAllUserRepos, getStargazers} from '../../services/GithubApis';
 import {responseAllUserReposInterface} from '../../services/responseInterfaces/ResponseAllUserReposInterface';
 import {responseStargazersInterfaces} from '../../services/responseInterfaces/ResponseStargazersInterfaces';
 import ShowStargazers from './components/showStargazers/ShowStargazers';
+import {style} from './Styles';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'ResultPage'>;
+type Props = {
+  navigation: NativeStackNavigationProp<RootStackParamList, 'ResultPage'>;
+  route: RouteProp<RootStackParamList, 'ResultPage'>;
+};
 
 const ResultPage = ({route, navigation}: Props) => {
   const {params} = route;
@@ -40,7 +45,7 @@ const ResultPage = ({route, navigation}: Props) => {
   return (
     <SafeAreaView style={style.container}>
       <ScrollView>
-        {!!repos ? (
+        {repos ? (
           <>
             <PageHeader
               url={params.userInfo?.avatar_url}
@@ -73,44 +78,13 @@ const ResultPage = ({route, navigation}: Props) => {
             </View>
           </>
         ) : (
-          <ActivityIndicator size="large" color="#2da44e" />
+          <View style={style.wrapperSpinner}>
+            <ActivityIndicator size="large" color="#2da44e" />
+          </View>
         )}
       </ScrollView>
     </SafeAreaView>
   );
 };
-
-const style = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#000000',
-  },
-  containerSelect: {
-    width: '100%',
-    alignItems: 'center',
-  },
-  dropdownBtnStyle: {
-    width: '70%',
-    height: 50,
-    textAlign: 'center',
-    backgroundColor: '#f6f8fa',
-    borderColor: '#d0d7de',
-    borderRadius: 8,
-    borderWidth: 1.5,
-  },
-  text: {
-    color: '#ffffff',
-    textAlign: 'center',
-    alignItems: 'center',
-    fontSize: 20,
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  dropdownBtnTxtStyle: {color: '#000000', textAlign: 'left'},
-  dropdownDropdownStyle: {backgroundColor: '#f6f8fa'},
-  dropdownRowStyle: {backgroundColor: '#f6f8fa', borderBottomColor: '#000000'},
-  dropdownRowTxtStyle: {color: '#000000', textAlign: 'center'},
-});
 
 export default ResultPage;
