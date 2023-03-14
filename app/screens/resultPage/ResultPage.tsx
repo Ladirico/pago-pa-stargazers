@@ -28,8 +28,11 @@ const ResultPage = ({route, navigation}: Props) => {
   const [stargazers, setStargazers] =
     useState<responseStargazersInterfaces[]>();
   const [repos, setRepos] = useState<Array<string>>();
+  const [showStargazersList, setShowshowStargazersList] =
+    useState<boolean>(false);
 
   const onChangeValue = (selectedItem: string) => {
+    setShowshowStargazersList(false);
     if (params.userInfo?.login) {
       getStargazers(params.userInfo.login, selectedItem)
         .then(resp => setStargazers(resp.data))
@@ -79,7 +82,11 @@ const ResultPage = ({route, navigation}: Props) => {
               ) : (
                 <Text style={style.text}>No result</Text>
               )}
-              <ShowStargazers stargazers={stargazers} />
+              <ShowStargazers
+                showStargazersList={showStargazersList}
+                setShowshowStargazersList={setShowshowStargazersList}
+                stargazers={stargazers}
+              />
             </View>
           </>
         ) : (

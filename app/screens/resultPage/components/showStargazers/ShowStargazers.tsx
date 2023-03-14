@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useMemo} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import Line from '../../../../components/line/Line';
 import {responseStargazersInterfaces} from '../../../../services/responseInterfaces/ResponseStargazersInterfaces';
@@ -7,12 +7,15 @@ import {style} from './Styles';
 
 interface StargazersInterface {
   stargazers: Array<responseStargazersInterfaces> | [] | undefined;
+  showStargazersList: boolean;
+  setShowshowStargazersList: (showStargazersList: boolean) => void;
 }
 
-const ShowStargazers = ({stargazers}: StargazersInterface) => {
-  const [showStargazersList, setShowshowStargazersList] =
-    useState<boolean>(false);
-
+const ShowStargazers = ({
+  stargazers,
+  showStargazersList,
+  setShowshowStargazersList,
+}: StargazersInterface) => {
   const showList = () => {
     stargazers && setShowshowStargazersList(!showStargazersList);
   };
@@ -23,10 +26,6 @@ const ShowStargazers = ({stargazers}: StargazersInterface) => {
   const mapEvenItems = useMemo(() => {
     return stargazers?.filter((el, index) => index % 2 !== 0) ?? [];
   }, [stargazers]);
-
-  useEffect(() => {
-    setShowshowStargazersList(false);
-  }, []);
 
   return (
     <View style={style.container}>
@@ -57,16 +56,22 @@ const ShowStargazers = ({stargazers}: StargazersInterface) => {
                 })}
               </View>
               <View style={style.wrapHalfStargazersList}>
-                {mapOddItems &&
-                  mapEvenItems?.map((el, index) => {
-                    return (
-                      <SingleItem
-                        key={index}
-                        text={el.login}
-                        avatarUrl={el.avatar_url}
-                      />
-                    );
-                  })}
+                {mapOddItems && (
+                  <>
+                    {mapEvenItems?.map((el, index) => {
+                      return (
+                        <SingleItem
+                          key={index}
+                          text={el.login}
+                          avatarUrl={el.avatar_url}
+                        />
+                      );
+                    })}
+                    {mapEvenItems.length < mapOddItems.length && (
+                      <SingleItem text="" avatarUrl="" />
+                    )}
+                  </>
+                )}
               </View>
             </View>
           )}
