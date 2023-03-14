@@ -26,7 +26,7 @@ This application gives you the ability to see, for each person on GitHub, what p
 **Available for Android.**
 
 <p align="center">
-  <img src=../app/assets/error.jpeg width=350>
+  <img src=https://github.com/Ladirico/pago-pa-stargazers/blob/develop/app/assets/reademeImgs/error.jpeg width=350>
 </p>
  
 ## Features
