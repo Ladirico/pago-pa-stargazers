@@ -13,11 +13,21 @@ const SingleItem = (props: Props) => {
   return (
     <View style={isStarWrapper ? style.wrapperStars : style.wrapper}>
       {isStarWrapper ? (
-        <Text style={style.star}>&#9734;</Text>
+        <Text testID="star-text-test" style={style.star}>
+          &#9734;
+        </Text>
       ) : (
-        <Image style={style.img} source={{uri: avatarUrl}} />
+        <Image
+          testID="image-test"
+          style={style.img}
+          source={{uri: avatarUrl}}
+        />
       )}
-      <Text style={style.text} ellipsizeMode="clip" numberOfLines={1}>
+      <Text
+        testID="text-test"
+        style={style.text}
+        ellipsizeMode="clip"
+        numberOfLines={1}>
         {text}
       </Text>
     </View>

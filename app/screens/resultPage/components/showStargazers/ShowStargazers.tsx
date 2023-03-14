@@ -31,13 +31,18 @@ const ShowStargazers = ({stargazers}: StargazersInterface) => {
   return (
     <View style={style.container}>
       <Line />
-      <TouchableOpacity onPress={showList} style={style.button}>
+      <TouchableOpacity
+        testID="show-stargazers-button-test"
+        onPress={showList}
+        style={style.button}>
         <Text style={style.butt}>
           <SingleItem isStarWrapper={true} text={stargazers?.length ?? 0} />
         </Text>
       </TouchableOpacity>
       {showStargazersList && (
-        <View style={style.wrapperStargazersList}>
+        <View
+          style={style.wrapperStargazersList}
+          testID="container-stargazers-test">
           {mapOddItems.length > 0 && (
             <View style={style.alignStargazersLists}>
               <View style={style.wrapHalfStargazersList}>

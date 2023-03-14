@@ -45,6 +45,7 @@ const SearchPage = ({navigation}: Props) => {
 
         <View style={style.inputWrapper}>
           <TextInput
+            testID="input-test"
             style={style.input}
             placeholder="Search by name"
             editable

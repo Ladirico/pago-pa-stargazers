@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/pageHeader/PageHeader.tsx</title>
+    <title>Code coverage report for screens/resultPage/components/singleItem/SingleItem.tsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,7 +19,7 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/pageHeader</a> PageHeader.tsx</h1>
+        <h1><a href="../../../../index.html">All files</a> / <a href="index.html">screens/resultPage/components/singleItem</a> SingleItem.tsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
@@ -32,7 +32,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -100,23 +100,7 @@
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a>
-<a name='L41'></a><a href='#L41'>41</a>
-<a name='L42'></a><a href='#L42'>42</a>
-<a name='L43'></a><a href='#L43'>43</a>
-<a name='L44'></a><a href='#L44'>44</a>
-<a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a>
-<a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a>
-<a name='L49'></a><a href='#L49'>49</a>
-<a name='L50'></a><a href='#L50'>50</a>
-<a name='L51'></a><a href='#L51'>51</a>
-<a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a>
-<a name='L54'></a><a href='#L54'>54</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -127,24 +111,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -170,58 +138,42 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
-import Line from '../line/Line';
+import {Image, Text, View} from 'react-native';
+import {style} from './Styles';
 &nbsp;
 interface Props {
-  url?: string;
-  title?: string;
-  subtitle?: string;
+  isStarWrapper?: boolean | false;
+  text: string | number;
+  avatarUrl?: string;
 }
 &nbsp;
-const PageHeader = ({url, title, subtitle}: Props) =&gt; {
+const SingleItem = (props: Props) =&gt; {
+  const {isStarWrapper = false, text, avatarUrl} = props;
   return (
-    &lt;View style={style.container_logo_name} testID="header-test"&gt;
-      &lt;Image source={{uri: url}} style={style.img} /&gt;
-      &lt;Text style={style.title}&gt;{title}&lt;/Text&gt;
-      &lt;Text style={style.subtitle}&gt;{subtitle}&lt;/Text&gt;
-      &lt;Line /&gt;
+    &lt;View style={isStarWrapper ? style.wrapperStars : style.wrapper}&gt;
+      {isStarWrapper ? (
+        &lt;Text testID="star-text-test" style={style.star}&gt;
+          &amp;#9734;
+        &lt;/Text&gt;
+      ) : (
+        &lt;Image
+          testID="image-test"
+          style={style.img}
+          source={{uri: avatarUrl}}
+        /&gt;
+      )}
+      &lt;Text
+        testID="text-test"
+        style={style.text}
+        ellipsizeMode="clip"
+        numberOfLines={1}&gt;
+        {text}
+      &lt;/Text&gt;
     &lt;/View&gt;
   );
 };
 &nbsp;
-const style = StyleSheet.create({
-  container_logo_name: {
-    paddingTop: 30,
-    marginBottom: 20,
-    paddingBottom: 20,
-  },
-  img: {
-    width: 130,
-    height: 130,
-    alignSelf: 'center',
-    borderRadius: 80,
-  },
-  title: {
-    paddingTop: 10,
-    color: '#ffffff',
-    fontSize: 50,
-    textAlign: 'center',
-    alignItems: 'center',
-    fontWeight: 'normal',
-  },
-  subtitle: {
-    paddingTop: 10,
-    color: '#ffffff',
-    textAlign: 'center',
-    alignItems: 'center',
-    fontSize: 15,
-    paddingLeft: 20,
-    paddingRight: 20,
-    paddingBottom: 30,
-  },
-});
-export default PageHeader;
+export default SingleItem;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -231,14 +183,14 @@ export default PageHeader;
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
                 at 2023-03-14T00:03:50.570Z
             </div>
-        <script src="../../prettify.js"></script>
+        <script src="../../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../../../../sorter.js"></script>
+        <script src="../../../../block-navigation.js"></script>
     </body>
 </html>
     
