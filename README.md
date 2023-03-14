@@ -9,7 +9,7 @@
 </h4>
 
 ## Table of Contents
- 
+
 - [Introduction](#introduction)
 - [Features](#features)
 - [Feedback](#feedback)
@@ -18,15 +18,15 @@
 - [Backers](#backers-)
 - [Sponsors](#sponsors-)
 - [Acknowledgments](#acknowledgments)
-  
+
 ## Introduction
 
 This application gives you the ability to see, for each person on GitHub, what projects they have created and how many people have added each project to their favorites.
 
 **Available for Android.**
- 
+
 <p align="center">
-  <img src= width=350>
+  <img src=../app/assets/error.jpeg width=350>
 </p>
  
 ## Features
@@ -98,5 +98,3 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 ## Acknowledgments
  
 Thanks to [JetBrains](https://www.jetbrains.com) for supporting us with a [free Open Source License](https://www.jetbrains.com/buy/opensource).
- 
- 
