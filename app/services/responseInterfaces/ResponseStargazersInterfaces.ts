@@ -1,4 +1,4 @@
-export interface responseStargazersInterfaces {
+export interface ResponseStargazersInterfaces {
   avatar_url: string;
   events_url: string;
   followers_url: string;

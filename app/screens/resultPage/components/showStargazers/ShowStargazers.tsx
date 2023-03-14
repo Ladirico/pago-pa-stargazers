@@ -1,12 +1,12 @@
 import React, {useMemo, useState} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import Line from '../../../../components/line/Line';
-import {responseStargazersInterfaces} from '../../../../services/responseInterfaces/ResponseStargazersInterfaces';
+import {ResponseStargazersInterfaces} from '../../../../services/responseInterfaces/ResponseStargazersInterfaces';
 import SingleItem from '../singleItem/SingleItem';
 import {style} from './Styles';
 
 interface Props {
-  stargazers: Array<responseStargazersInterfaces> | [] | undefined;
+  stargazers: Array<ResponseStargazersInterfaces> | [] | undefined;
 }
 
 const ShowStargazers: React.FC<Props> = ({stargazers}) => {

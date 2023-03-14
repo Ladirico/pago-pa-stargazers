@@ -12,7 +12,7 @@ import {
 import {RootStackParamList} from '../../App';
 import PageHeader from '../../components/pageHeader/PageHeader';
 import {getUserInfo} from '../../services/GithubApis';
-import {responseUserInfoInterface} from '../../services/responseInterfaces/ResponseUserInfoInterface';
+import {ResponseUserInfoInterface} from '../../services/responseInterfaces/ResponseUserInfoInterface';
 import {style} from './Styles';
 
 type Props = {
@@ -28,7 +28,7 @@ const SearchPage: React.FC<Props> = ({navigation}) => {
 
   const goForward = () => {
     getUserInfo(textInput)
-      .then((resp: AxiosResponse<responseUserInfoInterface>) => {
+      .then((resp: AxiosResponse<ResponseUserInfoInterface>) => {
         navigation.navigate('ResultPage', {userInfo: resp.data});
       })
       .catch(() => navigation.navigate('ErrorPage'));

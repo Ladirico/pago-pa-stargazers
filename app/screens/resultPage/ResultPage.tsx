@@ -13,8 +13,8 @@ import SelectDropdown from 'react-native-select-dropdown';
 import {RootStackParamList} from '../../App';
 import PageHeader from '../../components/pageHeader/PageHeader';
 import {getAllUserRepos, getStargazers} from '../../services/GithubApis';
-import {responseAllUserReposInterface} from '../../services/responseInterfaces/ResponseAllUserReposInterface';
-import {responseStargazersInterfaces} from '../../services/responseInterfaces/ResponseStargazersInterfaces';
+import {ResponseAllUserReposInterface} from '../../services/responseInterfaces/ResponseAllUserReposInterface';
+import {ResponseStargazersInterfaces} from '../../services/responseInterfaces/ResponseStargazersInterfaces';
 import ShowStargazers from './components/showStargazers/ShowStargazers';
 import {style} from './Styles';
 
@@ -26,7 +26,7 @@ type Props = {
 const ResultPage: React.FC<Props> = ({route, navigation}) => {
   const {params} = route;
   const [stargazers, setStargazers] =
-    useState<responseStargazersInterfaces[]>();
+    useState<ResponseStargazersInterfaces[]>();
   const [repos, setRepos] = useState<Array<string>>();
 
   const onChangeValue = (selectedItem: string) => {
@@ -41,7 +41,7 @@ const ResultPage: React.FC<Props> = ({route, navigation}) => {
     getAllUserRepos(params.userInfo.login)
       .then((response: AxiosResponse) =>
         setRepos(
-          response.data.map((el: responseAllUserReposInterface) => el.name),
+          response.data.map((el: ResponseAllUserReposInterface) => el.name),
         ),
       )
       .catch(() => navigation.navigate('ErrorPage'));
@@ -57,7 +57,7 @@ const ResultPage: React.FC<Props> = ({route, navigation}) => {
               title={params.userInfo?.name}
               subtitle={params.userInfo?.login}
             />
-            <View style={style.containerSelect}>
+            <View style={style.containerSelect} testID="dropdown-test">
               {repos.length > 0 ? (
                 <SelectDropdown
                   buttonStyle={style.dropdownBtnStyle}

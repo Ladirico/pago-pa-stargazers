@@ -1,6 +1,7 @@
 import React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react-native';
 import ShowStargazers from '../app/screens/resultPage/components/showStargazers/ShowStargazers';
+import {mockGetStargazers} from '../app/utils/mock/ApisResponsesMock';
 
 describe('correct render of all page items', () => {
   test('the component should be defined and rendered', async () => {
@@ -13,11 +14,14 @@ describe('correct render of all page items', () => {
     );
     await expect(containerStars).toBeDefined();
   });
-  //   test('the component should be defined and rendered and is not star item ', () => {
-  //     render(<SingleItem text="text" avatarUrl="" />);
-  //     const starText = screen.getByTestId('star-text-test');
-  //     const image = screen.getByTestId('image-test');
-  //     expect(image).toBeDefined();
-  //     expect(starText).not.toBeDefined();
-  //   });
+  test('the component should be defined and rendered too all the components', async () => {
+    render(<ShowStargazers stargazers={mockGetStargazers} />);
+    const button = screen.getByTestId('show-stargazers-button-test');
+    expect(button).toBeDefined();
+    fireEvent.press(button);
+    const containerStars = await screen.getByTestId(
+      'container-stargazers-test',
+    );
+    await expect(containerStars).toBeDefined();
+  });
 });

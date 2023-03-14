@@ -4,10 +4,10 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import ResultPage from './screens/resultPage/ResultPage';
 import SearchPage from './screens/searchPage/SearchPage';
 import ErrorPage from './screens/errorPage/ErrorPage';
-import {responseUserInfoInterface} from './services/responseInterfaces/ResponseUserInfoInterface';
+import {ResponseUserInfoInterface} from './services/responseInterfaces/ResponseUserInfoInterface';
 
 export type RootStackParamList = {
-  ResultPage: {userInfo: responseUserInfoInterface};
+  ResultPage: {userInfo: ResponseUserInfoInterface};
   SearchPage: undefined;
   ErrorPage: undefined;
 };

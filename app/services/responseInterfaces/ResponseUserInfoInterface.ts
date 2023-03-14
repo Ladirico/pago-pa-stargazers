@@ -1,4 +1,4 @@
-export interface responseUserInfoInterface {
+export interface ResponseUserInfoInterface {
   login: string;
   id: number;
   node_id: string;
