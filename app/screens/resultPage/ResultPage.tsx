@@ -23,16 +23,13 @@ type Props = {
   route: RouteProp<RootStackParamList, 'ResultPage'>;
 };
 
-const ResultPage = ({route, navigation}: Props) => {
+const ResultPage: React.FC<Props> = ({route, navigation}) => {
   const {params} = route;
   const [stargazers, setStargazers] =
     useState<responseStargazersInterfaces[]>();
   const [repos, setRepos] = useState<Array<string>>();
-  const [showStargazersList, setShowshowStargazersList] =
-    useState<boolean>(false);
 
   const onChangeValue = (selectedItem: string) => {
-    setShowshowStargazersList(false);
     if (params.userInfo?.login) {
       getStargazers(params.userInfo.login, selectedItem)
         .then(resp => setStargazers(resp.data))
@@ -82,11 +79,7 @@ const ResultPage = ({route, navigation}: Props) => {
               ) : (
                 <Text style={style.text}>No result</Text>
               )}
-              <ShowStargazers
-                showStargazersList={showStargazersList}
-                setShowshowStargazersList={setShowshowStargazersList}
-                stargazers={stargazers}
-              />
+              <ShowStargazers stargazers={stargazers} />
             </View>
           </>
         ) : (

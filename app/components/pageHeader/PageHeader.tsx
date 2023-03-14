@@ -8,7 +8,7 @@ interface Props {
   subtitle?: string;
 }
 
-const PageHeader = ({url, title, subtitle}: Props) => {
+const PageHeader: React.FC<Props> = ({url, title, subtitle}) => {
   return (
     <View style={style.container_logo_name} testID="header-test">
       <Image source={{uri: url}} style={style.img} />

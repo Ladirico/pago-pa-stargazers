@@ -8,7 +8,7 @@ type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'ErrorPage'>;
 };
 
-const ErrorPage = ({navigation}: Props) => {
+const ErrorPage: React.FC<Props> = ({navigation}) => {
   const goBackToFirstPage = () => {
     navigation.navigate('SearchPage');
   };

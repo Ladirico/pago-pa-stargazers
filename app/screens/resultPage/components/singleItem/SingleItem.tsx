@@ -8,7 +8,7 @@ interface Props {
   avatarUrl?: string;
 }
 
-const SingleItem = (props: Props) => {
+const SingleItem: React.FC<Props> = props => {
   const {isStarWrapper = false, text, avatarUrl} = props;
   return (
     <View style={isStarWrapper ? style.wrapperStars : style.wrapper}>

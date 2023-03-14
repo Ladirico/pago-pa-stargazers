@@ -2,7 +2,6 @@ import React from 'react';
 import {render, screen} from '@testing-library/react-native';
 import {fireEvent} from 'react-native-testing-library';
 import SearchPage from '../app/screens/searchPage/SearchPage';
-
 const navigation = {navigate: () => jest.fn()};
 
 describe('correct render of all page components', () => {
@@ -22,7 +21,7 @@ describe('correct render of all page components', () => {
     const button = screen.getByText('Start Stalking');
     const input = screen.getByTestId('input-test');
     expect(input).toBeDefined();
-    fireEvent.changeText(input, {value: 'a'});
+    fireEvent.changeText(input, 'a');
     expect(button).toBeDefined();
     fireEvent.press(button);
   });

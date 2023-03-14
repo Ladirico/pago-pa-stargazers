@@ -19,7 +19,7 @@ type Props = {
   navigation: NativeStackNavigationProp<RootStackParamList, 'SearchPage'>;
 };
 
-const SearchPage = ({navigation}: Props) => {
+const SearchPage: React.FC<Props> = ({navigation}) => {
   const [textInput, setTextInput] = useState<string>('');
 
   const onChangeText = (text: string) => {

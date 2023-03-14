@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.33% </span>
+                <span class="strong">69.23% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/15</span>
+                <span class='fraction'>9/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">57.14% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>8/14</span>
+                <span class='fraction'>8/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55.55% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>5/9</span>
+                <span class='fraction'>4/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">84.61% </span>
+                <span class="strong">81.81% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/13</span>
+                <span class='fraction'>9/11</span>
             </div>
         
             
@@ -142,7 +142,8 @@
 <a name='L77'></a><a href='#L77'>77</a>
 <a name='L78'></a><a href='#L78'>78</a>
 <a name='L79'></a><a href='#L79'>79</a>
-<a name='L80'></a><a href='#L80'>80</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -156,17 +157,12 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -203,6 +199,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,21 +218,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, {useState, useEffect, useMemo} from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, {useMemo, useState} from 'react';
 import {View, TouchableOpacity, Text} from 'react-native';
 import Line from '../../../../components/line/Line';
 import {responseStargazersInterfaces} from '../../../../services/responseInterfaces/ResponseStargazersInterfaces';
 import SingleItem from '../singleItem/SingleItem';
 import {style} from './Styles';
 &nbsp;
-interface StargazersInterface {
+interface Props {
   stargazers: Array&lt;responseStargazersInterfaces&gt; | [] | undefined;
 }
 &nbsp;
-const ShowStargazers = ({stargazers}: StargazersInterface) =&gt; {
+const ShowStargazers: React.FC&lt;Props&gt; = ({stargazers}) =&gt; {
   const [showStargazersList, setShowshowStargazersList] =
     useState&lt;boolean&gt;(false);
-&nbsp;
   const showList = () =&gt; {
     stargazers &amp;&amp; setShowshowStargazersList(!showStargazersList);
   };
@@ -246,10 +247,6 @@ const ShowStargazers = ({stargazers}: StargazersInterface) =&gt; {
   const mapEvenItems = useMemo(() =&gt; {
     return stargazers?.filter(<span class="fstat-no" title="function not covered" >(e</span>l, index) =&gt; <span class="cstat-no" title="statement not covered" >index % 2 !== 0)</span> ?? <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
   }, [stargazers]);
-&nbsp;
-  useEffect(() =&gt; {
-    setShowshowStargazersList(false);
-  }, []);
 &nbsp;
   return (
     &lt;View style={style.container}&gt;
@@ -280,16 +277,22 @@ const ShowStargazers = ({stargazers}: StargazersInterface) =&gt; {
                 })}
               &lt;/View&gt;
               &lt;View style={style.wrapHalfStargazersList}&gt;
-                {mapOddItems &amp;&amp;
-                  mapEvenItems?.map(<span class="fstat-no" title="function not covered" >(e</span>l, index) =&gt; {
-<span class="cstat-no" title="statement not covered" >                    return (</span>
-                      &lt;SingleItem
-                        key={index}
-                        text={el.login}
-                        avatarUrl={el.avatar_url}
-                      /&gt;
-                    );
-                  })}
+                {mapOddItems &amp;&amp; (
+                  &lt;&gt;
+                    {mapEvenItems?.map(<span class="fstat-no" title="function not covered" >(e</span>l, index) =&gt; {
+<span class="cstat-no" title="statement not covered" >                      return (</span>
+                        &lt;SingleItem
+                          key={index}
+                          text={el.login}
+                          avatarUrl={el.avatar_url}
+                        /&gt;
+                      );
+                    })}
+                    {mapEvenItems.length &lt; mapOddItems.length &amp;&amp; (
+                      &lt;SingleItem text="" avatarUrl="" /&gt;
+                    )}
+                  &lt;/&gt;
+                )}
               &lt;/View&gt;
             &lt;/View&gt;
           )}
@@ -307,7 +310,7 @@ export default ShowStargazers;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-03-14T00:03:50.570Z
+                at 2023-03-14T19:19:45.176Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
