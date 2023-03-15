@@ -1,4 +1,4 @@
-package com.pagopastartgazers.newarchitecture.components;
+package com.pagoPaStargazers.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
