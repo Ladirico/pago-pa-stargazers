@@ -33,7 +33,7 @@ This application gives you the ability to see, for each person on GitHub, what p
 
 <p>
     <span>This is the first screen that is shown to the user. To begin the search there is a need to enter the name of the user whose information we want to         search for and click on the "Start Stalking" button.
-On click, a [GET ](https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#get-a-user) is performed to retrieve information on the creator that was chosen </span>
+On click, a [React Native Guide ](https://facebook.github.io/react-native/docs/getting-started.html) [GET ](https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#get-a-user) is performed to retrieve information on the creator that was chosen </span>
 </p>
 
 </br>
