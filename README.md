@@ -33,7 +33,7 @@ This application gives you the ability to see, for each person on GitHub, what p
 
 <p>
     <span>This is the first screen that is shown to the user. To begin the search there is a need to enter the name of the user whose information we want to         search for and click on the "Start Stalking" button.
-On click, a <a href="https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#get-a-user">GET API</a> is performed to retrieve information on the creator that was chosen </span>
+On click, a <a href="https://docs.github.com/en/rest/users/users?apiVersion=2022-11-28#get-a-user">GET API</a> is performed to retrieve information on the creator that was chosen.</span>
 </p>
 
 </br>
@@ -46,7 +46,7 @@ On click, a <a href="https://docs.github.com/en/rest/users/users?apiVersion=2022
 </br>
 
 <p>
-    <span>Once the search is started there can be two different scenarios. If the user should have accidentally entered an incorrect username or there should be a technical problem with the services the user will be sent back to an error page. In this case clicking "Close" will redirect the user to the Reserarch Page. The second scenario is where the GitHub user is found, as in the screenshot to the right. In this scenario, a <a href="https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user">GET API</a> is performed when the page is loaded to retrieve all information on the public repositories present on the profile of the selected user</span>
+    <span>Once the search is started there can be two different scenarios. If the user should have accidentally entered an incorrect username or there should be a technical problem with the services the user will be sent back to an error page. In this case clicking "Close" will redirect the user to the Reserarch Page. The second scenario is where the GitHub user is found, as in the screenshot to the right. In this scenario, a <a href="https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#list-repositories-for-a-user">GET API</a> is performed when the page is loaded to retrieve all information on the public repositories present on the profile of the selected user.</span>
 </p>
 
 </br>
@@ -86,9 +86,7 @@ Inside the folder 'components' I have placed all the components that are common 
 In the folder 'screens' are the folders of all screens that are seen by the user. As you can see, inside the "searchPage" folder I have also placed the components folder which contains all the components common to that specific screen.
 In the "services" folder are all the APIs and all the response interfaces.
 In the "utils" folder is the folder with the mocks that I used for testing.
-
 </br>
-
 - [assets](./app/assets)
   - [reademeImgs](./app/assets/reademeImgs)
 - [components](./app/components)
