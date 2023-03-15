@@ -60,6 +60,9 @@ const ResultPage: React.FC<Props> = ({route, navigation}) => {
             <View style={style.containerSelect} testID="dropdown-test">
               {repos.length > 0 ? (
                 <SelectDropdown
+                  search
+                  searchInputStyle={style.dropdownDropdownStyle}
+                  searchInputTxtStyle={style.dropdownRowTxtStyle}
                   buttonStyle={style.dropdownBtnStyle}
                   buttonTextStyle={style.dropdownBtnTxtStyle}
                   dropdownStyle={style.dropdownDropdownStyle}

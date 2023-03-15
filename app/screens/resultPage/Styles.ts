@@ -36,8 +36,12 @@ export const style = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
   },
-  dropdownBtnTxtStyle: {color: '#000000', textAlign: 'left'},
-  dropdownDropdownStyle: {backgroundColor: '#f6f8fa'},
+  dropdownBtnTxtStyle: {color: '#000000', textAlign: 'center'},
+  dropdownDropdownStyle: {
+    backgroundColor: '#f6f8fa',
+    borderBottomColor: '#000000',
+    borderBottomWidth: 1,
+  },
   dropdownRowStyle: {backgroundColor: '#f6f8fa', borderBottomColor: '#000000'},
   dropdownRowTxtStyle: {color: '#000000', textAlign: 'center'},
 });
